@@ -55,7 +55,9 @@ class HerSampler:
         hi_ep_t_indices = np.sum(episode_batch["hindsight_instruction"], -1) > 0
 
         # check if episodes contains HI transitions
-        if np.sum(hi_ep_t_indices) and ((self.method_name == 'hipss' and hipss_module is not None and hipss_module.good_enough) or (self.method_name == 'heir')):
+        if np.sum(hi_ep_t_indices) and (
+            (self.method_name == 'hipss' and hipss_module is not None and hipss_module.good_enough) or
+            (self.method_name == 'heir')):
             # get indices of the hindsight episodes and transitions
             hi_ep_indices, hi_t_indices = np.where(hi_ep_t_indices == True)
             assert np.all(hi_ep_indices < rollout_batch_size), "hindsight episode index higher than rollout batch size"
@@ -74,9 +76,10 @@ class HerSampler:
             hi_ep_indices_repeat = hi_ep_indices.repeat(self.replay_k).reshape(-1, self.replay_k).T
             if self.replay_strategy == 'episode':
                 # randomly sample hindsight transitions encountered within the episode before the environment signal
-                new_hi_t_indices = np.random.randint(low=np.zeros_like(hi_t_indices),
-                                                     high=hi_t_indices + 1, # to include the last transitions
-                                                     size=(self.replay_k, len(hi_t_indices)))
+                new_hi_t_indices = np.random.randint(
+                    low=np.zeros_like(hi_t_indices),
+                    high=hi_t_indices + 1, # to include the last transitions
+                    size=(self.replay_k, len(hi_t_indices)))
                 assert np.all(new_hi_t_indices <= hi_t_indices.max())
                 hi_t_indices = new_hi_t_indices
             elif self.replay_strategy == 'future':

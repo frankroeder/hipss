@@ -1,9 +1,7 @@
-# Language-Conditioned Soft Actor-Critic
+# Hindsight Instruction Prediction from State Sequences (HIPSS)
 
-This repository contains various implementations to solve goal-conditioned and
-language-conditioned RL tasks.
-Features such as hindsight experience replay for goals and language
-instructions, as well as methods for intrinsic motivation are contained.
+This repository contains the implementation of our paper [**_Grounding Hindsight Instructions in Multi-GOal Reinforcement Learning for Robotics_**](example.com).
+Both proposed methods **_HEIR_** and **_HIPSS_** are part of this source code.
 
 ## Installation
 > ⚠️ Access to [LANRO](https://github.com/frankroeder/lanro) is required!
@@ -14,26 +12,18 @@ instructions, as well as methods for intrinsic motivation are contained.
 
 ## Training
 
-### Single process
+To reproduce the results of our paper, please have a look at the script
 ```bash
-# goal-conditioned
-python train.py n_epochs=10 agent=SAC env_name=PandaReach-v0
-# language-conditioned
-python train.py n_epochs=20 agent=LCSAC env_name=PandaNLReach2-v0 with_gru=True
-```
-
-### Multiprocess
-```bash
-# goal-conditioned
-mpirun -np 4 python -u train.py n_epochs=10 agent=SAC env_name=PandaReach-v0
-# language-conditioned
-mpirun -np 4 python -u train.py n_epochs=20 agent=LCSAC env_name=PandaNLReach2-v0 with_gru=True
+python train.py n_epochs=20 agent=LCSAC env_name=PandaNLReach2-v0
 ```
 
 ## Enjoy
 ```bash
-# here we use normal arguments
-python demo.py --demo-path <path to the trial folder>
+python demo.py --demo-path <path to the trial folder or wandb URI>
+```
+## Demo of trained HIPSS agent
+```bash
+python demo.py --demo-path TODO
 ```
 
 ## Developers

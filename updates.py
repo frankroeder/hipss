@@ -22,9 +22,9 @@ def update_entropy(alpha, log_alpha, target_entropy, log_pi, alpha_optim, cfg):
     return alpha_loss, alpha_tlogs
 
 
-def update_flat(actor_network, critic_network, critic_target_network, policy_optim, critic_optim,
-                alpha, log_alpha, target_entropy, alpha_optim, obs_norm, ag_norm, g_norm, obs_next_norm, actions,
-                rewards, cfg, env_params):
+def update_flat(actor_network, critic_network, critic_target_network, policy_optim, critic_optim, alpha, log_alpha,
+                target_entropy, alpha_optim, obs_norm, ag_norm, g_norm, obs_next_norm, actions, rewards, cfg,
+                env_params):
     inputs_norm = np.concatenate([obs_norm, ag_norm, g_norm], axis=1)
     inputs_next_norm = np.concatenate([obs_next_norm, ag_norm, g_norm], axis=1)
 
@@ -81,9 +81,8 @@ def update_flat(actor_network, critic_network, critic_target_network, policy_opt
     return train_metrics
 
 
-def update_language(actor_network, critic_network, critic_target_network, policy_optim, critic_optim,
-                    alpha, log_alpha, target_entropy, alpha_optim, obs_norm, instruction, obs_next_norm, actions,
-                    rewards, cfg):
+def update_language(actor_network, critic_network, critic_target_network, policy_optim, critic_optim, alpha, log_alpha,
+                    target_entropy, alpha_optim, obs_norm, instruction, obs_next_norm, actions, rewards, cfg):
 
     inputs_norm = obs_norm
     inputs_next_norm = obs_next_norm

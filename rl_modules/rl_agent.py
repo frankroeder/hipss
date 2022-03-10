@@ -143,10 +143,10 @@ class RLAgent:
         obs_next_norm = self.o_norm.normalize(transitions['obs_next'])
         #  ag_next_norm = self.g_norm.normalize(transitions['ag_next'])
 
-        metric_dict = update_flat(self.actor_network, self.critic_network,
-                                  self.critic_target_network, self.policy_optim, self.critic_optim, self.alpha,
-                                  self.log_alpha, self.target_entropy, self.alpha_optim, obs_norm, ag_norm, g_norm,
-                                  obs_next_norm, actions, rewards, self.cfg, self.env_params)
+        metric_dict = update_flat(self.actor_network, self.critic_network, self.critic_target_network,
+                                  self.policy_optim, self.critic_optim, self.alpha, self.log_alpha, self.target_entropy,
+                                  self.alpha_optim, obs_norm, ag_norm, g_norm, obs_next_norm, actions, rewards,
+                                  self.cfg, self.env_params)
         if 'reward_metrics' in transitions:
             metric_dict.update(transitions['reward_metrics'])
         return metric_dict

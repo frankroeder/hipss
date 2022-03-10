@@ -140,10 +140,10 @@ class LangRLAgent:
             obs_norm = self.o_norm.normalize(transitions['obs'])
             obs_next_norm = self.o_norm.normalize(transitions['obs_next'])
 
-        metric_dict = update_language(self.actor_network, self.critic_network,
-                                      self.critic_target_network, self.policy_optim, self.critic_optim, self.alpha,
-                                      self.log_alpha, self.target_entropy, self.alpha_optim, obs_norm, instruction,
-                                      obs_next_norm, actions, rewards, self.cfg)
+        metric_dict = update_language(self.actor_network, self.critic_network, self.critic_target_network,
+                                      self.policy_optim, self.critic_optim, self.alpha, self.log_alpha,
+                                      self.target_entropy, self.alpha_optim, obs_norm, instruction, obs_next_norm,
+                                      actions, rewards, self.cfg)
         if 'reward_metrics' in transitions:
             metric_dict.update(transitions['reward_metrics'])
         return metric_dict
