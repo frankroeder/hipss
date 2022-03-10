@@ -1,0 +1,7 @@
+# Hindsight Expert Instruction Replay (HEIR)
+name: 'heir'
+# number of transitions to replay for each HI epsiode
+replay_k: 2
+# the replay strategy "episode" "future" "final"
+# best results with "future" and "final"
+replay_strategy: 'future'

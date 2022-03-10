@@ -1,0 +1,7 @@
+git+ssh://git@github.com/frankroeder/lanro.git
+torch
+mpi4py
+wandb
+hydra-core==1.1.1
+optuna
+opencv-python
