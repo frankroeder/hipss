@@ -10,7 +10,6 @@ import numpy as np
 import torch
 import lanro
 import wandb
-import optuna
 
 from gym_wrapper import FrameStack, GrayScaleObservation
 from mpi_utils import logger
@@ -195,13 +194,7 @@ def launch(cfg: DictConfig):
                                              video_folder=os.path.join(logdir, 'videos'),
                                              video_length=env_params['max_timesteps'],
                                              name_prefix=f'lcrl_{epoch}')
-        if 'NLMeta' in cfg.env_name:
-            eval_success, meta_dict, eval_rewards = rollout_worker.generate_test_rollout_meta()
-            for _key, _val in meta_dict.items():
-                global_train_metrics[_key] = MPI.COMM_WORLD.allreduce(np.mean(_val), op=MPI.SUM)
-        else:
-            eval_success, eval_rewards = rollout_worker.generate_test_rollout()
-
+        eval_success, eval_rewards = rollout_worker.generate_test_rollout()
         # close video recording
         if rank == 0 and cfg.log_video:
             rollout_worker.env.close_video_recorder()
@@ -282,51 +275,13 @@ def launch(cfg: DictConfig):
     return round(global_eval_success / MPI.COMM_WORLD.Get_size(), 3)
 
 
-def optimize_agent(trial: optuna.Trial, cfg):
-    model_kwargs = {
-        #  "lr_actor": 0.001,
-        #  "lr_critic": 0.001,
-        #  "lr_entropy": 0.001,
-        "batch_size": trial.suggest_int("batch_size", 64, 512, 64),
-        "hidden_size": trial.suggest_int("hidden_size", 64, 512, 64),
-        "feature_embedding_size": trial.suggest_int("feature_embedding_size", 64, 512, 64),
-        "gamma": trial.suggest_float("gamma", 0.95, 0.99, log=True),
-        "alpha": trial.suggest_float("alpha", 0, 0.8, step=0.1),
-        "polyak": trial.suggest_float("polyak", 0.90, 1.0, step=0.01),
-        "with_gru": trial.suggest_categorical("with_gru", [True, False]),
-        "one_hot": trial.suggest_categorical("one_hot", [True, False]),
-        "embedding_size": trial.suggest_int("embedding_size", 16, 64, 16),
-        "automatic_entropy_tuning": trial.suggest_categorical("automatic_entropy_tuning", [True, False]),
-    }
-    if model_kwargs['with_gru']:
-        # add specific parameters if GRU is enabled
-        model_kwargs = {
-            **model_kwargs,
-            "bidirectional": trial.suggest_categorical("bidirectional", [True, False]),
-        }
-    cfg.update(model_kwargs)
-    success_rate = launch(cfg)
-    return round(success_rate, 3)
-
-
 @hydra.main(config_path="conf", config_name="config")
 def main(cfg: DictConfig) -> None:
     check_hydra_config(cfg)
     os.environ['OMP_NUM_THREADS'] = '1'
     os.environ['MKL_NUM_THREADS'] = '1'
     os.environ['IN_MPI'] = '1'
-    if cfg.trials:
-        study = optuna.create_study(direction="maximize")
-        study.optimize(lambda trial: optimize_agent(trial, cfg), n_trials=cfg.trials, show_progress_bar=True)
-        print("Best trial:")
-        trial = study.best_trial
-        print("Start Time:", trial.datetime_start)
-        print("Mean Reward: ", trial.value)
-        print("Params: ")
-        for key, value in trial.params.items():
-            print(" {}: {}".format(key, value))
-    else:
-        launch(cfg)
+    launch(cfg)
 
 
 if __name__ == '__main__':

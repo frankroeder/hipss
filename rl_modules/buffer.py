@@ -31,30 +31,6 @@ class Buffer(object):
         return self.size
 
 
-class ErrorBuffer(Buffer):
-
-    def __init__(self, max_size):
-        super(ErrorBuffer, self).__init__(max_size, 0)
-        self._errors = torch.empty(max_size, dtype=torch.float32, device=self.device)
-
-    def _add_single(self, err):
-        self._errors[self._cursor] = err
-        self._inc_cursor()
-
-    def add(self, errors):
-        for _err in errors:
-            self._add_single(_err)
-
-    def get_all(self):
-        return self._errors[:self._size]
-
-    def get_min(self):
-        return self.get_all().min()
-
-    def get_max(self):
-        return self.get_all().max()
-
-
 class ReplayBuffer:
 
     def __init__(self, env_params, buffer_size, sample_func, lang_mode=False, hipss_module=None):

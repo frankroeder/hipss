@@ -95,17 +95,3 @@ class RolloutWorker:
         success_rate = np.mean([_rd['success'][-1] for rd in rollout_data for _rd in rd])
         rewards = np.sum([_rd['reward'] for rd in rollout_data for _rd in rd], 1).mean()
         return success_rate, rewards
-
-    def generate_test_rollout_meta(self, animated=False):
-        rollout_data = {task: [] for task in self.env.task.task_classes.keys()}
-        for task in rollout_data.keys():
-            for _ in range(self.cfg.n_test_rollouts):
-                rollout = self.generate_rollout(train_mode=False, animated=animated)
-                rollout_data[self.env.task.current_task].append(rollout)
-        meta = {}
-        for task in rollout_data.keys():
-            meta[f'success_{task}'] = np.mean([_rd['success'][-1] for rd in rollout_data[task] for _rd in rd])
-            meta[f'reward_{task}'] = np.sum([_rd['reward'] for rd in rollout_data[task] for _rd in rd], 1).mean()
-        success = np.mean([meta[f'success_{task}'] for task in rollout_data.keys()])
-        reward = np.mean([meta[f'reward_{task}'] for task in rollout_data.keys()])
-        return success, meta, reward
