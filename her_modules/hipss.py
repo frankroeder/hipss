@@ -148,13 +148,13 @@ class HIPSSModule:
             pred_word = self.vocab.idx_to_word(flat_preds[idx].argmax().item())
             # NOTE: if the target is a shape specific word, any prediction from the
             # list of possible object_words is a positive prediction
-            if self.env.task.object_mode == 'simple':
+            if self.env.task.mode == 'default':
                 object_words = self.env.task.object_words
                 # is a relevant target word
                 if target_word in object_words and pred_word in object_words:
                     # change the target to the predicted word
                     flat_targets[idx] = flat_preds[idx].argmax().clone()
-            elif self.env.task.object_mode == 'complex':
+            elif 'shape' in self.env.task.mode:
                 object_words_by_shape = np.array(self.env.task.object_words).reshape(
                     len(SHAPES), len(SHAPES.SQUARE.value[1]))
                 for obj_ws in object_words_by_shape:
@@ -170,11 +170,11 @@ class HIPSSModule:
             for idx in range(len(target_indices[b_idx])):
                 target_word = self.vocab.idx_to_word(target_indices[b_idx][idx].item())
                 pred_word = self.vocab.idx_to_word(pred_indices[b_idx][idx].item())
-                if self.env.task.object_mode == 'simple':
+                if self.env.task.mode == 'default':
                     object_words = self.env.task.object_words
                     if target_word in object_words and pred_word in object_words:
                         target_indices[b_idx][idx] = pred_indices[b_idx][idx].clone()
-                elif self.env.task.object_mode == 'complex':
+                elif 'shape' in self.env.task.mode:
                     object_words_by_shape = np.array(self.env.task.object_words).reshape(
                         len(SHAPES), len(SHAPES.SQUARE.value[1]))
                     for obj_ws in object_words_by_shape:
