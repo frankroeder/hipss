@@ -149,14 +149,13 @@ class HIPSSModule:
             # NOTE: if the target is a shape specific word, any prediction from the
             # list of possible object_words is a positive prediction
             if self.env.task.mode == 'default':
-                object_words = self.env.task.object_words
+                object_words = np.array(SHAPES.SQUARE.value[1])
                 # is a relevant target word
                 if target_word in object_words and pred_word in object_words:
                     # change the target to the predicted word
                     flat_targets[idx] = flat_preds[idx].argmax().clone()
             elif 'shape' in self.env.task.mode:
-                object_words_by_shape = np.array(self.env.task.object_words).reshape(
-                    len(SHAPES), len(SHAPES.SQUARE.value[1]))
+                object_words_by_shape = np.array([shape.value[1] for shape in SHAPES])
                 for obj_ws in object_words_by_shape:
                     if target_word in obj_ws and pred_word in obj_ws:
                         # change the target to the predicted word of the corresponding shape
@@ -171,12 +170,11 @@ class HIPSSModule:
                 target_word = self.vocab.idx_to_word(target_indices[b_idx][idx].item())
                 pred_word = self.vocab.idx_to_word(pred_indices[b_idx][idx].item())
                 if self.env.task.mode == 'default':
-                    object_words = self.env.task.object_words
+                    object_words = np.array(SHAPES.SQUARE.value[1])
                     if target_word in object_words and pred_word in object_words:
                         target_indices[b_idx][idx] = pred_indices[b_idx][idx].clone()
                 elif 'shape' in self.env.task.mode:
-                    object_words_by_shape = np.array(self.env.task.object_words).reshape(
-                        len(SHAPES), len(SHAPES.SQUARE.value[1]))
+                    object_words_by_shape = np.array([shape.value[1] for shape in SHAPES])
                     for obj_ws in object_words_by_shape:
                         if target_word in obj_ws and pred_word in obj_ws:
                             # change the target to the predicted word of the corresponding shape
