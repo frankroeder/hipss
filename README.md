@@ -1,10 +1,10 @@
 # Hindsight Instruction Prediction from State Sequences (HIPSS)
 
-This repository contains the implementation of our paper [**_Grounding Hindsight Instructions in Multi-GOal Reinforcement Learning for Robotics_**](example.com).
+This repository contains the implementations of our paper [**_Grounding Hindsight Instructions in Multi-Goal Reinforcement Learning for Robotics_**](example.com).
 Both proposed methods **_HEIR_** and **_HIPSS_** are part of this source code.
 
 ## Installation
-> ⚠️ Access to [LANRO](https://github.com/frankroeder/lanro) is required!
+> ⚠️ You need to install [LANRO](https://github.com/frankroeder/lanro-gym)
 
 - `git clone https://github.com/frankroeder/lcrl.git`
 - pip users: `pip install -r requirements.txt`
@@ -20,10 +20,6 @@ python train.py n_epochs=20 agent=LCSAC env_name=PandaNLReach2-v0
 ## Enjoy
 ```bash
 python demo.py --demo-path <path to the trial folder or wandb URI>
-```
-## Demo of trained HIPSS agent
-```bash
-python demo.py --demo-path TODO
 ```
 
 ## Developers
