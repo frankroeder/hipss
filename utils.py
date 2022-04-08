@@ -40,7 +40,7 @@ class NumpyArrayEncoder(json.JSONEncoder):
         elif isinstance(obj, np.ndarray):
             return obj.tolist()
         elif isinstance(obj, object):
-            # TODO: Ignore classes for now
+            # NOTE: Ignore classes for now
             return None
         else:
             return super(NumpyArrayEncoder, self).default(obj)

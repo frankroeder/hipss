@@ -1,34 +1,5 @@
-import torch
 import threading
 import numpy as np
-
-
-class Buffer(object):
-
-    def __init__(self, capacity, batch_size):
-        self.capacity = capacity
-        self.batch_size = batch_size
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self._size = 0
-        self._cursor = 0
-
-    def _inc_cursor(self):
-        # Increase size until max size is reached
-        if self._size < self.capacity:
-            self._size += 1
-        # When cursor reaches end, restart at beginning, overwriting oldest entries first
-        self._cursor = (self._cursor + 1) % self.capacity
-
-    def reset(self):
-        self._cursor = 0
-        self._size = 0
-
-    @property
-    def size(self):
-        return self._size
-
-    def __len__(self):
-        return self.size
 
 
 class ReplayBuffer:

@@ -13,7 +13,7 @@ main() {
   PRJ_NAME="ICDL_2022_HIPSS"
   EMODES=("2Shape" "2ColorShape" "2" "2Color")
 
-  for n in {1..3}; do
+  for n in {1..5}; do
     for ENV_MODE in "${EMODES[@]}"; do
       for ENV_ID in "Panda${ENV}${ENV_MODE}-v0" "Panda${ENV}${ENV_MODE}HI-v0"; do
         if [[ $ENV_MODE == "2" ]]; then

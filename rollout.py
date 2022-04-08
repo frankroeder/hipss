@@ -91,7 +91,7 @@ class RolloutWorker:
         for _ in range(self.cfg.n_test_rollouts):
             rollout = self.generate_rollout(train_mode=False, animated=animated)
             rollout_data.append(rollout)
-        # only take last step to calculate success value
+        # only take the last step to calculate success rate
         success_rate = np.mean([_rd['success'][-1] for rd in rollout_data for _rd in rd])
         rewards = np.sum([_rd['reward'] for rd in rollout_data for _rd in rd], 1).mean()
         return success_rate, rewards

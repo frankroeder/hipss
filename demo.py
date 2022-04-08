@@ -1,7 +1,7 @@
 """
 This demo.py script allows loading a trained agent for demonstration.
 The location to restore the agent can either be a local folder (--demo-path) or
-a remotely accessible WANDB trial in a project (--wandb-url).
+a remotely accessible WANDB trial in of a project (--wandb-url).
 """
 import argparse
 import torch
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     with open(os.path.join(path, CONFIG_LOAD_PATH), 'r') as f:
         cfg = OmegaConf.load(f.name)
 
-    if ('Panda' or 'UR5') in cfg.env_name:
+    if 'Panda' in cfg.env_name:
         env = gym.make(cfg.env_name, render=True)
     else:
         env = gym.make(cfg.env_name)

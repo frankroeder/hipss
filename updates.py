@@ -23,8 +23,7 @@ def update_entropy(alpha, log_alpha, target_entropy, log_pi, alpha_optim, cfg):
 
 
 def update_flat(actor_network, critic_network, critic_target_network, policy_optim, critic_optim, alpha, log_alpha,
-                target_entropy, alpha_optim, obs_norm, ag_norm, g_norm, obs_next_norm, actions, rewards, cfg,
-                env_params):
+                target_entropy, alpha_optim, obs_norm, ag_norm, g_norm, obs_next_norm, actions, rewards, cfg):
     inputs_norm = np.concatenate([obs_norm, ag_norm, g_norm], axis=1)
     inputs_next_norm = np.concatenate([obs_next_norm, ag_norm, g_norm], axis=1)
 

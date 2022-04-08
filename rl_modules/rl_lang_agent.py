@@ -103,7 +103,6 @@ class LangRLAgent:
         mb_rewards = episode['reward']
         mb_hindsight_instructions = episode['hindsight_instruction']
         mb_obs_next = mb_obs[1:, :]
-        # get the number of normalization transitions
         num_transitions = mb_actions.shape[0]
         buffer_temp = {
             'obs': np.expand_dims(mb_obs, 0),

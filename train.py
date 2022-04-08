@@ -113,7 +113,7 @@ def launch(cfg: DictConfig):
                               config=OmegaConf.to_container(cfg),
                               reinit=False)
             if 'tensorboard' in cfg.logging_formats:
-                # auto-upload sb3's tensorboard metrics
+                # auto-upload tensorboard metrics
                 wandb_args['sync_tensorboard'] = True
                 wandb_args['monitor_gym'] = True
             if 'entity' in cfg:

@@ -16,13 +16,11 @@ n_layers: 2
 
 train_epochs: 1
 train_freq: 2
-# when the model is good enough to be used for hindsight learning
+# threshold before the model is used for instruction prediction
 val_acc_threshold: 0.7
 # size of the validation set
 val_ratio: 0.2
 
-# number of transitions to replay for each HI epsiode
+# number of transitions to replay for each HI episode
 replay_k: 2
-# the replay strategy "episode" "future" "final"
-# best results with "future" and "final"
 replay_strategy: 'future'

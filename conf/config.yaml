@@ -73,7 +73,6 @@ gray_scale: False
 # CNN architecture: 'dqn' or 'drqv2'
 cnn_architecture: 'drqv2'
 # whether to use data augmentation for pixel observations
-# NOTE: static pixel observation only works with augmentation and
 cnn_augmentation: True
 
 # language embedding size
