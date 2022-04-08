@@ -81,7 +81,7 @@ if __name__ == '__main__':
         policy = RLAgent(cfg, env_params, env.compute_reward, None)
         language_conditioned = False
     elif cfg.agent == "LCSAC":
-        policy = LangRLAgent(cfg, env_params, env.compute_reward, None, None)
+        policy = LangRLAgent(cfg, env_params, env.compute_reward, None)
         language_conditioned = True
     else:
         raise NotImplementedError
