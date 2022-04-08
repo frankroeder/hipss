@@ -34,7 +34,7 @@ if __name__ == '__main__':
     MODEL_LOAD_PATH = 'models/model_latest.pt'
     CONFIG_LOAD_PATH = 'omega_config.yaml'
     if demo_args.wandb_url:
-        TMP_DEMO_DIR = "/tmp/lcrl_demo"
+        TMP_DEMO_DIR = "/tmp/hipss_demo"
         wandb_url = demo_args.wandb_url.replace("/runs", "")
         # create a temporary folder called demo to download the experiment files
         if os.path.exists(TMP_DEMO_DIR):

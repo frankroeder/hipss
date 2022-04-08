@@ -193,7 +193,7 @@ def launch(cfg: DictConfig):
             rollout_worker.env = RecordVideo(rollout_worker.env,
                                              video_folder=os.path.join(logdir, 'videos'),
                                              video_length=env_params['max_timesteps'],
-                                             name_prefix=f'lcrl_{epoch}')
+                                             name_prefix=f'hipss_{epoch}')
         eval_success, eval_rewards = rollout_worker.generate_test_rollout()
         # close video recording
         if rank == 0 and cfg.log_video:
@@ -204,7 +204,7 @@ def launch(cfg: DictConfig):
                 wandb.log({
                     "video":
                     # only log the last test rollout of the episode
-                    wandb.Video(os.path.join(logdir, 'videos', f'lcrl_{epoch}-episode-{0}.mp4'), fps=4, format="gif")
+                    wandb.Video(os.path.join(logdir, 'videos', f'hipss_{epoch}-episode-{0}.mp4'), fps=4, format="gif")
                 })
 
         time_dict['eval'] += time.time() - t_i

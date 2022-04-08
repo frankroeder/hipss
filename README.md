@@ -1,12 +1,12 @@
 # Hindsight Instruction Prediction from State Sequences (HIPSS)
 
-This repository contains the implementations of our paper [**_Grounding Hindsight Instructions in Multi-Goal Reinforcement Learning for Robotics_**](example.com).
+This repository contains the implementations of our paper [**_Grounding Hindsight Instructions in Multi-Goal Reinforcement Learning for Robotics_**]().
 Both proposed methods **_HEIR_** and **_HIPSS_** are part of this source code.
 
 ## Installation
 > ⚠️ You need to install [LANRO](https://github.com/frankroeder/lanro-gym)
 
-- `git clone https://github.com/frankroeder/lcrl.git`
+- `git clone https://github.com/frankroeder/hipss.git`
 - pip users: `pip install -r requirements.txt`
 - conda users: `conda create --file= conda_env.yaml`
 
