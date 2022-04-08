@@ -1,0 +1,26 @@
+# Hindsight Instruction Prediction from State Sequences (HIPSS)
+name: 'hipss'
+
+lr: 0.0003
+batch_size: 32
+
+# grad norm clipping
+clip_grad_norm: True
+# max norm for clipping critic grads
+max_norm: 1
+
+# encoder and decoder parameters
+hidden_size: 128
+dropout: 0.0
+n_layers: 2
+
+train_epochs: 1
+train_freq: 2
+# threshold before the model is used for instruction prediction
+val_acc_threshold: 0.7
+# size of the validation set
+val_ratio: 0.2
+
+# number of transitions to replay for each HI episode
+replay_k: 2
+replay_strategy: 'future'

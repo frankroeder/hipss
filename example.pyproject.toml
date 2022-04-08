@@ -1,0 +1,34 @@
+# See here: https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+[tool.pyright]
+include = []
+exclude = [
+  "**/__pycache__",
+]
+venv= "PATH TO VENV"
+verboseOutput = true
+
+reportMissingImports = false
+reportMissingTypeStubs = true
+reportUnusedImport = false
+reportDuplicateImport = false
+reportOptionalMemberAccess = "none"
+reportUnusedVariable = "none"
+reportUnboundVariable = false
+
+pythonVersion = "" #"3.9.7"
+pythonPlatform = "Darwin"
+
+executionEnvironments = []
+
+[tool.yapf]
+based_on_style = "pep8"
+column_limit = 120
+spaces_before_comment = 1
+split_before_logical_operator = true
+dedent_closing_brackets = false
+
+[tool.yapfignore]
+ignore_patterns = [
+  "temp/**/*.py",
+  "temp2/*.py"
+]

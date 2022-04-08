@@ -1,0 +1,84 @@
+defaults:
+  - hindsight: 'heir'
+  - misc.yaml
+  - override hydra/output: custom
+  - override hydra/job_logging: none
+  - override hydra/hydra_logging: none
+
+#############
+#  General  #
+#############
+
+env_name: 'PandaNLReach2-v0'
+seed: null
+# the clip ratio
+clip_obs: 200
+# the clip range
+clip_range: 20
+
+# use SAC or LCSAC
+agent: 'LCSAC'
+# the number of epochs to train the agent
+n_epochs: 10
+# number of episodes per epoch
+n_cycles: 50
+# number of gradient updates
+n_batches: 30
+# number of evaluation episodes
+n_test_rollouts: 20
+# the size of the buffer
+buffer_size: 1_000_000
+# the batch size for actor-critic training
+batch_size: 1024
+# hidden size of networks
+hidden_size: 256
+# the discount factor
+gamma: 0.98
+# entropy coefficient
+alpha: 0.2
+# embedding size of the feature extractor
+feature_embedding_size: 128
+
+##############
+#  Learning  #
+##############
+
+# Tune entropy
+automatic_entropy_tuning: True
+# the learning rate of the actor
+lr_actor: 0.001
+# the learning rate of the critic
+lr_critic: 0.001
+# number of critics (usually 1 or 2 are sufficient)
+n_critics: 1
+# the learning rate of the entropy
+lr_entropy: 0.001
+# the average coefficient
+polyak: 0.95
+# the frequency of updating the target networks
+freq_target_update: 2
+
+# critic grad norm clipping
+clip_grad_norm: False
+# max norm for clipping critic grads
+max_norm: 1
+# whether to normalize goals
+normalize_goal: True
+
+# CNN parameters
+# how many frames to stack for pixel environment
+framestack: 3
+# Transform RGB pixel observations to gray_scale
+gray_scale: False
+# CNN architecture: 'dqn' or 'drqv2'
+cnn_architecture: 'drqv2'
+# whether to use data augmentation for pixel observations
+cnn_augmentation: True
+
+# language embedding size
+embedding_size: 32
+# use one hot encodings for words
+one_hot: False
+bidirectional: False
+with_gru: True
+dropout: 0.0
