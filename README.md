@@ -1,6 +1,6 @@
 # Hindsight Instruction Prediction from State Sequences (HIPSS)
 
-This repository contains the implementations of our paper [**_Grounding Hindsight Instructions in Multi-Goal Reinforcement Learning for Robotics_**]().
+This repository contains the implementations of our paper [**_Grounding Hindsight Instructions in Multi-Goal Reinforcement Learning for Robotics_**](https://arxiv.org/abs/2204.04308).
 Both proposed methods **_HEIR_** and **_HIPSS_** are part of this source code.
 
 ## Installation
