@@ -12,7 +12,8 @@ Both proposed methods **_HEIR_** and **_HIPSS_** are part of this source code.
 
 ## Training
 
-To reproduce the results of our paper, please have a look at the script
+To reproduce the results of our paper, please have a look at the script `train.sh`
+
 ```bash
 python train.py n_epochs=20 agent=LCSAC env_name=PandaNLReach2-v0
 ```
