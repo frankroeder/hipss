@@ -6,7 +6,7 @@ from torch.nn.utils.rnn import pack_padded_sequence
 from mpi_utils.mpi_utils import sync_grads
 from networks import FeatureExtractor
 from torch.nn.utils.clip_grad import clip_grad_norm_
-from lanro.utils import SHAPES
+from lanro_gym.utils import SHAPES
 
 
 class HIPSSEncoder(nn.Module):

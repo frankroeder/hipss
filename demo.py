@@ -10,7 +10,7 @@ from rl_modules.rl_lang_agent import LangRLAgent
 import torch
 from rl_modules.rl_agent import RLAgent
 import gym
-import lanro
+import lanro_gym
 import numpy as np
 from rollout import RolloutWorker
 import random

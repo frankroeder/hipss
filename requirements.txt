@@ -1,4 +1,4 @@
-git+ssh://git@github.com/frankroeder/lanro-gym.git
+lanro-gym==0.1.0
 gym==0.21.0
 torch
 mpi4py
