@@ -6,7 +6,7 @@ batch_size: 32
 
 # grad norm clipping
 clip_grad_norm: True
-# max norm for clipping critic grads
+# max norm for clipping grads
 max_norm: 1
 
 # encoder and decoder parameters
